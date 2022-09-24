@@ -37,8 +37,13 @@ const ToDoList: React.FC<IToDoList> = ({ user }) => {
       <Fragment>
         <h3>{name}'s Todo list</h3>
         <ul className="todo-list">
-          {todoList.map(({ id, title }) => (
-            <li key={`todo-item-${id}`}>{title}</li>
+          {todoList.map(({ id, title, completed }) => (
+            <li
+              key={`todo-item-${id}`}
+              className={completed ? 'completed' : ''}
+            >
+              {title}
+            </li>
           ))}
         </ul>
       </Fragment>

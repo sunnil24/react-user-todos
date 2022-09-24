@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { IUser } from '../../App';
 
+import './styles.css';
+
 const { useEffect, useState } = React;
 
 interface ICombo {
@@ -38,6 +40,7 @@ const UserCombo: React.FC<ICombo> = ({ handleSelectedUser }) => {
         list="user-list"
         onChange={handleDataSelect}
         className="user-combo-search"
+        placeholder="enter user name"
       />
       <datalist id="user-list">
         {userList.map(({ id, name }) => (

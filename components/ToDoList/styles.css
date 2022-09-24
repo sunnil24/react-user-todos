@@ -1,3 +1,6 @@
+:root {
+  --todo-border-color: #dfdfdf;
+}
 .todo-list {
   list-style: none;
   padding: 0;
@@ -5,14 +8,24 @@
 }
 
 .todo-list li {
-  border-bottom: 1px solid #ccc;
-  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--todo-border-color);
+  padding: 0.5rem 0;
   counter-increment: todo-list;
+  line-height: 1;
+}
+
+.todo-list li:hover {
+  background: var(--todo-border-color);
+}
+
+.todo-list li.completed {
+  text-decoration: line-through;
 }
 
 .todo-list li::before {
-  content: counter(todo-list);
-  font-weight: bold;
-  font-size: 16px;
+  content: counter(todo-list) '.';
   padding-right: 8px;
+  text-align: right;
+  width: min(26px);
+  display: inline-block;
 }

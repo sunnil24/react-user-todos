@@ -1,0 +1,16 @@
+.user-combo-search {
+  padding: 0.25rem 1rem;
+  width: 100%;
+  min-height: 50px;
+}
+
+::placeholder {
+  color: #565656;
+}
+
+.user-combo-search,
+.user-combo-search:hover,
+.user-combo-search:focus,
+.user-combo-search:active {
+  border: 1px solid #565656;
+}
