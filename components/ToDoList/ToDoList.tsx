@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { IUser } from '../../App';
+import ToDoItem from '../ToDoItem';
 
 import './styles.css';
 
@@ -9,7 +10,7 @@ interface IToDoList {
   user: IUser;
 }
 
-interface IToDoItem {
+export interface IToDoItem {
   userId: number;
   id: number;
   title: string;
@@ -37,13 +38,14 @@ const ToDoList: React.FC<IToDoList> = ({ user }) => {
       <Fragment>
         <h3>{name}'s Todo list</h3>
         <ul className="todo-list">
-          {todoList.map(({ id, title, completed }) => (
-            <li
+          {todoList.map(({ id, title, completed, userId }) => (
+            <ToDoItem
               key={`todo-item-${id}`}
-              className={completed ? 'completed' : ''}
-            >
-              {title}
-            </li>
+              title={title}
+              id={id}
+              userId={userId}
+              completed={completed}
+            />
           ))}
         </ul>
       </Fragment>
