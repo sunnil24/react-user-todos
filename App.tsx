@@ -2,6 +2,9 @@ import * as React from 'react';
 import UserCombo from './components/UserCombo';
 import './style.css';
 import ToDoList from './components/ToDoList';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 export interface IUser {
   id: number;
@@ -39,11 +42,11 @@ export default function App() {
   };
 
   return (
-    <Fragment>
+    <QueryClientProvider client={queryClient}>
       <main>
         <UserCombo handleSelectedUser={handleSelectedUser} />
         <ToDoList user={selectedUser} />
       </main>
-    </Fragment>
+    </QueryClientProvider>
   );
 }
