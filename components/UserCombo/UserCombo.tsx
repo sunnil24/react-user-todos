@@ -33,7 +33,12 @@ const UserCombo: React.FC<ICombo> = ({ handleSelectedUser }) => {
   return (
     <div className="user-combo">
       <h3>Select User</h3>
-      <input type="text" list="user-list" onChange={handleDataSelect} />
+      <input
+        type="search"
+        list="user-list"
+        onChange={handleDataSelect}
+        className="user-combo-search"
+      />
       <datalist id="user-list">
         {userList.map(({ id, name }) => (
           <option key={id} value={name} data-id={id}>

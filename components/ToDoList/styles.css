@@ -1,0 +1,18 @@
+.todo-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: todo-list;
+}
+
+.todo-list li {
+  border-bottom: 1px solid #ccc;
+  padding: 0.25rem 0;
+  counter-increment: todo-list;
+}
+
+.todo-list li::before {
+  content: counter(todo-list);
+  font-weight: bold;
+  font-size: 16px;
+  padding-right: 8px;
+}

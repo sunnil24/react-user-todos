@@ -30,7 +30,7 @@ export interface IUser {
 const { Fragment, useState } = React;
 
 export default function App() {
-  const [selectedUser, updateSelectedUser] = useState<IUser>(null);
+  const [selectedUser, updateSelectedUser] = useState<IUser>();
 
   const handleSelectedUser = (user: IUser): void => {
     if (user) {
@@ -40,9 +40,10 @@ export default function App() {
 
   return (
     <Fragment>
-      <UserCombo handleSelectedUser={handleSelectedUser} />
-      <hr />
-      <ToDoList user={selectedUser} />
+      <main>
+        <UserCombo handleSelectedUser={handleSelectedUser} />
+        <ToDoList user={selectedUser} />
+      </main>
     </Fragment>
   );
 }
