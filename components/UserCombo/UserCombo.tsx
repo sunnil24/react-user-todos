@@ -1,32 +1,13 @@
 import * as React from 'react';
+import { IUser } from '../../App';
 
 const { useEffect, useState } = React;
 
-interface IUser {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  };
-  phone: string;
-  website: string;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
+interface ICombo {
+  handleSelectedUser?(user: IUser): void;
 }
 
-const UserCombo: React.FC<{}> = () => {
+const UserCombo: React.FC<ICombo> = ({ handleSelectedUser }) => {
   const [userList, updateUserList] = useState<IUser[]>([]);
 
   useEffect(() => {
@@ -39,13 +20,25 @@ const UserCombo: React.FC<{}> = () => {
     })();
   }, []);
 
+  const handleDataSelect = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const selectedUser: string = e.target.value;
+
+    const selectedUserDetails = userList.find(
+      ({ name }: IUser): boolean => name === selectedUser
+    );
+
+    handleSelectedUser?.(selectedUserDetails);
+  };
+
   return (
     <div className="user-combo">
       <h3>Select User</h3>
-      <input type="text" list="user-list" />
+      <input type="text" list="user-list" onChange={handleDataSelect} />
       <datalist id="user-list">
         {userList.map(({ id, name }) => (
-          <option key={id}>{name}</option>
+          <option key={id} value={name} data-id={id}>
+            {name}
+          </option>
         ))}
       </datalist>
     </div>
