@@ -37,7 +37,6 @@ const ToDoList: React.FC<IToDoList> = ({ user }) => {
   if (name && !isLoading) {
     return (
       <Fragment>
-        <h3>{name}'s Todo list</h3>
         <ul className="todo-list">
           {data?.map(({ id, title, completed, userId }) => (
             <ToDoItem
