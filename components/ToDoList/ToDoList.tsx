@@ -19,29 +19,27 @@ export interface IToDoItem {
 }
 
 const ToDoList: React.FC<IToDoList> = ({ user }) => {
-  const [todoList, updateTodoList] = useState<IToDoItem[]>([]);
   const { id, name } = user || {};
 
-  const { isLoading, error, data, isFetching } = useQuery(["repoData"],)
+  const {
+    isLoading,
+    data,
+  }: {
+    isLoading: boolean;
+    data: IToDoItem[];
+  } = useQuery(['todos', id], async () => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/users/${id}/todos`
+    );
+    return await response.json();
+  });
 
-  useEffect(() => {
-    if (id) {
-      (async () => {
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/users/${id}/todos`
-        );
-        const todos = await response.json();
-        updateTodoList(todos);
-      })();
-    }
-  }, [id]);
-
-  if (name) {
+  if (name && !isLoading) {
     return (
       <Fragment>
         <h3>{name}'s Todo list</h3>
         <ul className="todo-list">
-          {todoList.map(({ id, title, completed, userId }) => (
+          {data?.map(({ id, title, completed, userId }) => (
             <ToDoItem
               key={`todo-item-${id}`}
               title={title}
